@@ -216,8 +216,13 @@ ICollection Members_CreateDataSource() {
 	if(Utility.GetParam("FormMembers_Sorting").Length>0&&!IsPostBack)
 	{ViewState["SortColumn"]=Utility.GetParam("FormMembers_Sorting");
 	 ViewState["SortDir"]="ASC";}
-	if(ViewState["SortColumn"]!=null) sOrder = " ORDER BY " + ViewState["SortColumn"].ToString()+" "+ViewState["SortDir"].ToString();
-	
+	if(ViewState["SortColumn"]!=null) {
+		string sortCol = System.Text.RegularExpressions.Regex.Replace(ViewState["SortColumn"].ToString(), @"[^a-zA-Z0-9_.]", "");
+		string sortDir = (ViewState["SortDir"] != null && ViewState["SortDir"].ToString().ToUpper() == "DESC") ? "DESC" : "ASC";
+		if (sortCol.Length > 0)
+			sOrder = " ORDER BY " + sortCol + " " + sortDir;
+	}
+
 	//-------------------------------
 	// Build WHERE statement
 	//-------------------------------

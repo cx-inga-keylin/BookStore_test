@@ -168,8 +168,13 @@ ICollection editorials_CreateDataSource() {
 	if(Utility.GetParam("Formeditorials_Sorting").Length>0&&!IsPostBack)
 	{ViewState["SortColumn"]=Utility.GetParam("Formeditorials_Sorting");
 	 ViewState["SortDir"]="ASC";}
-	if(ViewState["SortColumn"]!=null) sOrder = " ORDER BY " + ViewState["SortColumn"].ToString()+" "+ViewState["SortDir"].ToString();
-	
+	if(ViewState["SortColumn"]!=null) {
+		string sortCol = System.Text.RegularExpressions.Regex.Replace(ViewState["SortColumn"].ToString(), @"[^a-zA-Z0-9_.]", "");
+		string sortDir = (ViewState["SortDir"] != null && ViewState["SortDir"].ToString().ToUpper() == "DESC") ? "DESC" : "ASC";
+		if (sortCol.Length > 0)
+			sOrder = " ORDER BY " + sortCol + " " + sortDir;
+	}
+
 	System.Collections.Specialized.StringDictionary Params =new System.Collections.Specialized.StringDictionary();
 	
 	
