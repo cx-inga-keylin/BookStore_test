@@ -168,8 +168,13 @@ ICollection editorial_categories_CreateDataSource() {
 	if(Utility.GetParam("Formeditorial_categories_Sorting").Length>0&&!IsPostBack)
 	{ViewState["SortColumn"]=Utility.GetParam("Formeditorial_categories_Sorting");
 	 ViewState["SortDir"]="ASC";}
-	if(ViewState["SortColumn"]!=null) sOrder = " ORDER BY " + ViewState["SortColumn"].ToString()+" "+ViewState["SortDir"].ToString();
-	
+	if(ViewState["SortColumn"]!=null) {
+		string sortCol = System.Text.RegularExpressions.Regex.Replace(ViewState["SortColumn"].ToString(), @"[^a-zA-Z0-9_.]", "");
+		string sortDir = (ViewState["SortDir"] != null && ViewState["SortDir"].ToString().ToUpper() == "DESC") ? "DESC" : "ASC";
+		if (sortCol.Length > 0)
+			sOrder = " ORDER BY " + sortCol + " " + sortDir;
+	}
+
 	System.Collections.Specialized.StringDictionary Params =new System.Collections.Specialized.StringDictionary();
 	
 	
@@ -213,7 +218,7 @@ ICollection editorial_categories_CreateDataSource() {
 	DataSet ds = new DataSet();
 	
 	command.Fill(ds, (i_editorial_categories_curpage - 1) * editorial_categories_PAGENUM, editorial_categories_PAGENUM,"editorial_categories");
-	OleDbCommand ccommand = new OleDbCommand(editorial_categories_sCountSQL, Utility.Connection);
+	OleDbCommand ccommand = ./new OleDbCommand(editorial_categories_sCountSQL, Utility.Connection);
 	int PageTemp=(int)ccommand.ExecuteScalar();
 	editorial_categories_Pager.MaxPage=(PageTemp%editorial_categories_PAGENUM)>0?(int)(PageTemp/editorial_categories_PAGENUM)+1:(int)(PageTemp/editorial_categories_PAGENUM);
 	bool AllowScroller=editorial_categories_Pager.MaxPage==1?false:true;

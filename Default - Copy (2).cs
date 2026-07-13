@@ -284,7 +284,7 @@ public void Recommended_Repeater_ItemDataBound(Object Sender, RepeaterItemEventA
 	
 // Recommended Show Event begin
 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem) {
-   ((HyperLink)e.Item.FindControl("Recommended_name")).Text ="<img border=\"0\" src=\"" + ((DataRowView)e.Item.DataItem )["i_image_url"].ToString() + "\"></td><td valign=\"top\"><table width=\"100%\" style=\"width:100%\"><tr><td style=\"background-color: #FFFFFF; border-style: inset; border-width: 0\"><font style=\"font-size: 10pt; color: #CE7E00; font-weight: bold\"><b>" + ((DataRowView)e.Item.DataItem )["i_name"].ToString() + "</b>";
+   ((HyperLink)e.Item.FindControl("Recommended_name")).Text ="<img border=\"0\" src=\"" + HttpUtility.HtmlEncode(((DataRowView)e.Item.DataItem )["i_image_url"].ToString()) + "\"></td><td valign=\"top\"><table width=\"100%\" style=\"width:100%\"><tr><td style=\"background-color: #FFFFFF; border-style: inset; border-width: 0\"><font style=\"font-size: 10pt; color: #CE7E00; font-weight: bold\"><b>" + HttpUtility.HtmlEncode(((DataRowView)e.Item.DataItem )["i_name"].ToString()) + "</b>";
 }
 // Recommended Show Event end
 }
@@ -410,8 +410,8 @@ public void What_Repeater_ItemDataBound(Object Sender, RepeaterItemEventArgs e){
 	
 // What Show Event begin
 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem) {
-   ((HyperLink)e.Item.FindControl("What_article_title")).Text ="<b>"+((DataRowView)e.Item.DataItem )["e_article_title"].ToString()+"<b>";
-   ((Label)e.Item.FindControl("What_article_desc")).Text="<img align=\"left\" border=\"0\" src=\"" + Utility.Dlookup("items","image_url","item_id=" + ((DataRowView)e.Item.DataItem )["e_item_id"].ToString()) + "\">" + ((DataRowView)e.Item.DataItem )["e_article_desc"].ToString();
+   ((HyperLink)e.Item.FindControl("What_article_title")).Text ="<b>"+HttpUtility.HtmlEncode(((DataRowView)e.Item.DataItem )["e_article_title"].ToString())+"<b>";
+   ((Label)e.Item.FindControl("What_article_desc")).Text="<img align=\"left\" border=\"0\" src=\"" + HttpUtility.HtmlEncode(Utility.Dlookup("items","image_url","item_id=" + ((DataRowView)e.Item.DataItem )["e_item_id"].ToString()).ToString()) + "\">" + HttpUtility.HtmlEncode(((DataRowView)e.Item.DataItem )["e_article_desc"].ToString());
 }
 // What Show Event end
 }
@@ -600,8 +600,8 @@ public void New_Repeater_ItemDataBound(Object Sender, RepeaterItemEventArgs e){
 	
 // New Show Event begin
 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem) {
-   ((HyperLink)e.Item.FindControl("New_article_title")).Text ="<b>"+((DataRowView)e.Item.DataItem )["e_article_title"].ToString()+"<b>";
- ((Label)e.Item.FindControl("New_article_desc")).Text="<img align=\"left\" border=\"0\" src=\"" + Utility.Dlookup("items","image_url","item_id=" + ((DataRowView)e.Item.DataItem )["e_item_id"].ToString()) + "\">" + ((DataRowView)e.Item.DataItem )["e_article_desc"].ToString();
+   ((HyperLink)e.Item.FindControl("New_article_title")).Text ="<b>"+HttpUtility.HtmlEncode(((DataRowView)e.Item.DataItem )["e_article_title"].ToString())+"<b>";
+ ((Label)e.Item.FindControl("New_article_desc")).Text="<img align=\"left\" border=\"0\" src=\"" + HttpUtility.HtmlEncode(Utility.Dlookup("items","image_url","item_id=" + ((DataRowView)e.Item.DataItem )["e_item_id"].ToString()).ToString()) + "\">" + HttpUtility.HtmlEncode(((DataRowView)e.Item.DataItem )["e_article_desc"].ToString());
 
 }
 // New Show Event end
@@ -699,8 +699,8 @@ public void Weekly_Repeater_ItemDataBound(Object Sender, RepeaterItemEventArgs e
 	
 // Weekly Show Event begin
 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem) {
-   ((HyperLink)e.Item.FindControl("Weekly_article_title")).Text ="<b>"+((DataRowView)e.Item.DataItem )["e_article_title"].ToString()+"<b>";
-   ((Label)e.Item.FindControl("Weekly_article_desc")).Text="<img align=\"left\" border=\"0\" src=\"" + Utility.Dlookup("items","image_url","item_id=" + ((DataRowView)e.Item.DataItem )["e_item_id"].ToString()) + "\">" + ((DataRowView)e.Item.DataItem )["e_article_desc"].ToString();
+   ((HyperLink)e.Item.FindControl("Weekly_article_title")).Text ="<b>"+HttpUtility.HtmlEncode(((DataRowView)e.Item.DataItem )["e_article_title"].ToString())+"<b>";
+   ((Label)e.Item.FindControl("Weekly_article_desc")).Text="<img align=\"left\" border=\"0\" src=\"" + HttpUtility.HtmlEncode(Utility.Dlookup("items","image_url","item_id=" + ((DataRowView)e.Item.DataItem )["e_item_id"].ToString()).ToString()) + "\">" + HttpUtility.HtmlEncode(((DataRowView)e.Item.DataItem )["e_article_desc"].ToString());
 }
 // Weekly Show Event end
 }

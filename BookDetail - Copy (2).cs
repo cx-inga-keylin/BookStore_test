@@ -215,12 +215,12 @@ void Detail_Show() {
 		
 		
 
-	Detail_image_url.Text =CCUtility.GetValue(row, "image_url");
-		
-		Detail_image_url.NavigateUrl=CCUtility.GetValue(row, "product_url")+"";
-		
+	Detail_image_url.Text =Server.HtmlEncode(CCUtility.GetValue(row, "image_url").ToString());
 
-	Detail_notes.Text =CCUtility.GetValue(row, "notes");
+		Detail_image_url.NavigateUrl=CCUtility.GetValue(row, "product_url")+"";
+
+
+	Detail_notes.Text =Server.HtmlEncode(CCUtility.GetValue(row, "notes").ToString());
 		
 		
 		
@@ -330,7 +330,7 @@ void Order_Show() {
 	Order_order_id.Value = CCUtility.GetValue(row, "order_id");
 		
 
-	Order_quantity.Text = CCUtility.GetValue(row, "quantity");
+	Order_quantity.Text =Server.HtmlEncode(CCUtility.GetValue(row, "quantity").ToString());
 	Order_item_id.Value = CCUtility.GetValue(row, "item_id");
 		
 
@@ -484,7 +484,7 @@ void Rating_Show() {
 	Rating_item_id.Value = CCUtility.GetValue(row, "item_id");
 		
 
-	Rating_rating_view.Text =CCUtility.GetValue(row, "rating");
+	Rating_rating_view.Text =Server.HtmlEncode(CCUtility.GetValue(row, "rating").ToString());
 		
 		
 		
@@ -580,7 +580,7 @@ if (Int16.Parse(Rating_rating_view.Text)==0){
 	        sSQL = sSQL + " where " + sWhere;
 		
 // Rating Update Event begin
-sSQL="update items set rating=rating+" + Rating_rating.SelectedItem.Value + ", rating_count=rating_count+1 where item_id=" + Rating_item_id.Value;
+sSQL="update items set rating=rating+" + CCUtility.ToSQL(Rating_rating.SelectedItem.Value, FieldTypes.Number) + ", rating_count=rating_count+1 where item_id=" + CCUtility.ToSQL(Rating_item_id.Value, FieldTypes.Number);
 // Rating Update Event end
 Rating_BeforeSQLExecute(sSQL,"Update");
 		OleDbCommand cmd = new OleDbCommand(sSQL, Utility.Connection);
